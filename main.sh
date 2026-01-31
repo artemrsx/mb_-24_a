@@ -1,7 +1,8 @@
-DOMAIN=$1
-PASSWORD=$2
+EMAIL=$1
+DOMAIN=$2
 USER_NAME=$3
-EMAIL=$4
+PASSWORD=$4
+TELEGRAM_ID=$5
 
 # Установка нужных пакетов
 apt update
