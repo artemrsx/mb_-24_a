@@ -17,7 +17,7 @@ mkdir -p /var/lib/marzban/certs
 sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install
 
 # Меняем Marzban конфиг
-mkdir -p /opt/marzban
+echo "" >> /opt/marzban/.env
 echo "UVICORN_SSL_CERTFILE = \"/var/lib/marzban/certs/$DOMAIN.cer\"" >> /opt/marzban/.env
 echo "UVICORN_SSL_KEYFILE = \"/var/lib/marzban/certs/$DOMAIN.cer.key\"" >> /opt/marzban/.env
 echo "XRAY_SUBSCRIPTION_URL_PREFIX = \"https://$DOMAIN\"" >> /opt/marzban/.env
