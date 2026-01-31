@@ -1,3 +1,8 @@
+DOMAIN=$1
+PASSWORD=$2
+USER_NAME=$3
+EMAIL=$4
+
 # Установка нужных пакетов
 apt update
 apt install -y curl
