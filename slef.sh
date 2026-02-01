@@ -5,10 +5,14 @@ PASSWORD=$4
 TELEGRAM_ID=$5
 
 marzban uninstall
+
 systemctl stop nginx
-apt install nginx -y
+apt install -y nginx
+mkdir -p /var/www/html
+systemctl start nginx
 
 # certs
+systemctl stop nginx
 curl https://get.acme.sh | sh -s email="$EMAIL"
 
 mkdir -p /var/lib/marzban/certs
@@ -16,7 +20,7 @@ mkdir -p /var/lib/marzban/certs
   --issue --force -w /var/www/html -d "$DOMAIN" \
   --fullchain-file "/var/lib/marzban/certs/$DOMAIN.cer" \
   --key-file "/var/lib/marzban/certs/$DOMAIN.cer.key"
-
+systemctl start nginx
 cat /var/lib/marzban/certs/$DOMAIN.cer
 
 # Проверка наличия файлов сертификата
