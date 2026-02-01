@@ -17,6 +17,7 @@ curl https://get.acme.sh | sh -s email="$EMAIL"
 
 mkdir -p /var/lib/marzban/certs
 ~/.acme.sh/acme.sh \
+  --set-default-ca --server buypass \
   --issue --force -w /var/www/html -d "$DOMAIN" \
   --fullchain-file "/var/lib/marzban/certs/$DOMAIN.cer" \
   --key-file "/var/lib/marzban/certs/$DOMAIN.cer.key"
