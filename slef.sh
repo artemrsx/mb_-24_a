@@ -22,7 +22,7 @@ cat /var/lib/marzban/certs/$DOMAIN.cer
 # Проверка наличия файлов сертификата
 if [ ! -f "/var/lib/marzban/certs/$DOMAIN.cer" ] || [ ! -f "/var/lib/marzban/certs/$DOMAIN.cer.key" ]; then
     echo "ОШИБКА: Файлы сертификата не были созданы."
-    # exit 1
+    exit 1
 fi
 
 # Marzban
