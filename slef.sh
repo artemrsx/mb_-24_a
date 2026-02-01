@@ -9,8 +9,6 @@ systemctl stop nginx
 apt install nginx -y
 
 # certs
-export DOMAIN='artemrsx3.duckdns.org'
-
 curl https://get.acme.sh | sh -s email="$EMAIL"
 
 mkdir -p /var/lib/marzban/certs
