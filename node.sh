@@ -17,12 +17,16 @@ apt-get update && apt-get upgrade -y
 apt-get install curl socat git -y
 
 # Быстрая установка node
+# Кладем сертификат во временную папку
+echo "$CERTIFICATE" > /tmp/temp_cert.pem
 # 1. Сертификат
 # 2. Enter (завершить ввод сертификата)
 # 3. y (согласиться на REST)
 # 4. Enter (согласиться на service port по умолчанию 62050)
 # 5. Enter (согласиться на xray port по умолчанию 62051)
-printf "${CERTIFICATE}\n\ny\n\n\n" | sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban-node.sh)" @ install --name "$NODE_NAME"
+(cat /tmp/temp_cert.pem; echo ""; echo "y"; echo ""; echo "") | sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban-node.sh)" @ install --name "$NODE_NAME"
+# Удаляем временную папку
+rm /tmp/temp_cert.pem
 
 # Создаем файл для сертификата
 sudo mkdir -p /var/lib/marzban-node/
