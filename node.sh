@@ -9,6 +9,9 @@ if [ -z "$NODE_NAME" ] || [ -z "$CERTIFICATE" ]; then
   exit 1
 fi
 
+# Удаляем старую ноду, если она есть
+rm -rf /opt/$NODE_NAME
+
 # Обновляем сервер и софт
 apt-get update && apt-get upgrade -y
 apt-get install curl socat git -y
@@ -32,11 +35,6 @@ EOF
 # Прастим путь в docker-compose.yml автоматически
 # Скрипт установки может создать файл с дефолтными путями, лучше их перепроверить/заменить
 sed -i "s|SSL_CLIENT_CERT_FILE:.*|SSL_CLIENT_CERT_FILE: \"/var/lib/marzban-node/ssl_client_cert.pem\"|" /opt/$NODE_NAME/docker-compose.yml
-
-# На всякий случай открываем нужные порты (по дефолту они и так отрыты)
-ufw allow 62050/tcp
-ufw allow 62051/tcp
-ufw allow 443/tcp
 
 # Перезапускаем ноду
 cd /opt/$NODE_NAME && docker compose down && docker compose up -d
